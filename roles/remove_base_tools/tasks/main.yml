@@ -1,0 +1,27 @@
+- name: Removing not needed applications
+  apt:
+    name: 
+      - aspell
+      - autopsy
+      - caribou
+      - dmitry
+      - bully
+      - cadaver
+      - commix
+      - crunch
+      - davtest
+      - florence
+      - ghost-phisher
+      - patator
+      - powersploit
+      - ophcrack
+      - sakis3g
+      - scalpel
+      - sendemail
+      - skipfish
+      - sleuthkit
+      - maltego-teeth
+      - king-phisher
+      - htop
+      - hydra-gtk
+    state: absent

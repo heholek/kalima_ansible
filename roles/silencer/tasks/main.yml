@@ -1,0 +1,73 @@
+- name: Disabling the Gnome automatic software downloads 
+  command: " {{ item }}"
+  with_items: 
+      - gsettings set org.gnome.software download-updates false
+      - gsettings set org.gnome.software download-updates-notify false
+      - gsettings set org.gnome.software allow-updates false
+
+- name: Stopping NTP
+  service:
+    name: systemd-timesyncd
+    state: stopped
+
+- name: Disabling NTP
+  service:
+    name: systemd-timesyncd
+    enabled: no
+
+- name: Disable NTP Syncronization 
+  command: " {{ item }}"
+  with_items: 
+      - timedatectl set-ntp 0
+
+- name: Stopping RPCBind
+  service:
+    name: rpcbind
+    state: stopped
+
+- name: Disabling RPCBind
+  service:
+    name: rpcbind
+    enabled: no
+
+- name: Stopping network-manager services
+  service:
+    name: network-manager.service
+    state: stopped
+
+- name: Disabling network-manager services
+  service:
+    name: network-manager.service
+    enabled: no
+
+
+- name: Disabling ICMP echo replies 
+  shell: echo "net.ipv4.icmp_echo_ignore_all = 1" >> /etc/systectl.conf
+
+
+- name: Messing with kernel settings
+  command: sysctl -p
+
+- name: Disabling IPv6 
+  shell: " {{ item }}"
+  with_items: 
+      - echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+      - echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
+      - echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf
+
+- name: Messing with kernel settings
+  command: sysctl -p
+
+- name: Silencing Firefox
+  shell: " {{ item }}"
+  with_items: 
+      - echo "# Silencing for Firefox" >> /etc/hosts
+      - echo "127.0.0.2 detectportal.firefox.com" >> /etc/hosts
+      - echo "127.0.0.2 self-repair.mozilla.org" >> /etc/hosts
+      - echo "127.0.0.2 blocklist.addons.mozilla.org" >> /etc/hosts
+      - echo "127.0.0.2 firefox.settings.services.mozilla.com" >> /etc/hosts
+      - echo "127.0.0.2 content-signature.cdn.mozilla.net" >> /etc/hosts
+      - echo "127.0.0.2 safebrowsing.google.com" >> /etc/hosts
+      - echo "127.0.0.2 safebrowsing-cache.google.com" >> /etc/hosts
+      - echo "127.0.0.2 support.mozilla.org" >> /etc/hosts
+

@@ -1,0 +1,11 @@
+- name: Basic config
+  hosts: 127.0.0.1
+  connection: local
+
+  become: yes
+  gather_facts: false
+  roles:
+    - install_base_tools
+    - remove_base_tools
+    - silencer
+

@@ -1,0 +1,9 @@
+---
+- pip:
+    name: bloodhound
+
+
+- git:
+    repo: 'https://github.com/secgroundzero/tetanus'
+    dest: /opt/tetanus
+
