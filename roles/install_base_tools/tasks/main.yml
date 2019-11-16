@@ -1,9 +1,28 @@
----
-- pip:
-    name: bloodhound
 
-
-- git:
+- name: Cloning Tetanus 
+  git:
     repo: 'https://github.com/secgroundzero/tetanus'
     dest: /opt/tetanus
+
+- name: Cloning ad-ldap-enum 
+  git:
+    repo: 'https://github.com/CroweCybersecurity/ad-ldap-enum'
+    dest: /opt/ad-ldap-enum
+
+
+- name: Cloning LinEnum
+  git:
+    repo: 'https://github.com/rebootuser/LinEnum'
+    dest: /opt/LinEnum
+
+- name: Cloning Responder
+  git:
+    repo: 'https://github.com/lgandx/Responder'
+    dest: /opt/Responder
+
+
+- name: Cloning Unicorn
+  git:
+    repo: 'https://github.com/trustedsec/unicorn'
+    dest: /opt/Unicorn
 
