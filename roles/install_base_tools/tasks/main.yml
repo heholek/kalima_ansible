@@ -1,4 +1,3 @@
-
 - name: Cloning Tetanus 
   git:
     repo: 'https://github.com/secgroundzero/tetanus'
@@ -8,7 +7,6 @@
   git:
     repo: 'https://github.com/CroweCybersecurity/ad-ldap-enum'
     dest: /opt/ad-ldap-enum
-
 
 - name: Cloning LinEnum
   git:
@@ -20,9 +18,35 @@
     repo: 'https://github.com/lgandx/Responder'
     dest: /opt/Responder
 
-
 - name: Cloning Unicorn
   git:
     repo: 'https://github.com/trustedsec/unicorn'
     dest: /opt/Unicorn
+
+- name: Cloning ropnop's windapsearch
+  git:
+    repo: 'https://github.com/ropnop/windapsearch'
+    dest: /opt/windapsearch
+
+- name: Setting up windapsearch
+  command: pip install python-ldap
+
+
+- name: Cloning ropnop's Kerberos Scripts
+  git:
+    repo: 'https://github.com/ropnop/kerberos_windows_scripts'
+    dest: /opt/kerberos_windows_scripts
+
+- name: Cloning nishang
+  git:
+    repo: 'https://github.com/samratashok/nishang'
+    dest: /opt/nishang
+
+- name: Cloning Sharpshooter
+  git:
+    repo: 'https://github.com/mdsecactivebreach/SharpShooter'
+    dest: /opt/Sharpshooter
+
+
+
 

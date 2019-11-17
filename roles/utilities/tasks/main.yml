@@ -4,14 +4,11 @@
       - fish
     state: latest
 
-
 - name: Downloading Oh-My-Fish
   uri:
     url: https://get.oh-my.fish
     follow_redirects: all
     dest: ~/omf_install
-
-
 
 - name: Configuring Oh-My-Fish
   shell: " {{ item }}"
@@ -23,7 +20,6 @@
 
 - name: Configuring Obey2 greeting
   command: cp ~/Desktop/kalima_ansible/roles/utilities/files/obey2 ~/.config/fish/obey2
-
 
 - name: Configuring Oh-My-Fish
   shell: " {{ item }}"
@@ -48,4 +44,33 @@
     - ~/Templates
     - ~/Music
     
+- name: Mounting Shared Folders
+  shell: bash /root/Desktop/mount-shared-folders
+
+- name: Setting up wallpaper
+  shell: dconf write /org/gnome/desktop/background/picture-uri "'file:///root/Desktop/kalima_ansible/roles/utilities/files/wall.jpg'"
+
+- name: Setting favorite apps
+  shell: dconf write /org/gnome/shell/favorite-apps "['firefox-esr.desktop', 'org.gnome.Nautilus.desktop','chromium.desktop','leafpad.desktop', 'sublime_text.desktop']"
+
+#- name: Fixing resolution
+#  shell: bash /root/Desktop/kalima_ansible/roles/utilities/files/fix.sh
+
+  
+
+
+
+#- name: Install Oracle 8
+#  shell: " {{ item }}"
+#  with_items: 
+#      - wget -q -O java.tgz $(curl -s https://www.java.com/en/download/linux_manual.jsp | grep -E ".*x64.*javadl" | grep -v "RPM" | sed "s/.*href=\"//g;s/\".*//g" | head -n 1) 
+#      - tar xzf java.tgz
+#      - javaver="$(tar tf java.tgz | head -n1 | tr -d "/")"
+#      - [ ! -d /opt/java ]
+#      - mkdir /opt/java
+#      - mv $javaver /opt/java
+#      - update-alternatives --install "/usr/bin/java" "java" "/opt/java/$javaver/bin/java" 1
+#      - update-alternatives --set java /opt/java/$javaver/bin/java
+#      - rm java.tgz
+
 

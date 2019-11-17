@@ -1,0 +1,7 @@
+- name: Updating system
+  shell: " {{ item }}"
+  with_items: 
+      - apt update -y  
+      - apt autoremove -y 
+
+

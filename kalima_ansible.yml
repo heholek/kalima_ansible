@@ -5,6 +5,7 @@
   become: yes
   gather_facts: false
   roles:
+    - bootstrap
     - install_base_tools
     - remove_base_tools
     - silencer
