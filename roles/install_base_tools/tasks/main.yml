@@ -1,7 +1,7 @@
-- name: Installing Python-Pip
+- name: Installing python-pip
   apt:
     name: 
-      - python-pip
+      - python-pip 
     state: latest
 
 
@@ -65,8 +65,12 @@
     repo: 'https://github.com/ropnop/windapsearch'
     dest: /opt/windapsearch
 
-- name: Setting up windapsearch
-  command: pip install python-ldap
+
+- name: Installing python-pip
+  apt:
+    name: 
+      - python-ldap 
+    state: latest
 
 
 - name: Cloning ropnop's Kerberos Scripts
