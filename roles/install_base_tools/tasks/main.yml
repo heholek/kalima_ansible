@@ -1,3 +1,40 @@
+- name: Installing Python-Pip
+  apt:
+    name: 
+      - Python-pip
+    state: latest
+
+
+- name: Downloading Sublime text GPG
+  uri:
+    url: https://download.sublimetext.com/sublimehq-pub.gpg
+    follow_redirects: all
+    dest: ~/sublimehq-pub.gpg
+
+
+- name: Installing sublime-text GPG
+  command: apt-key add ~/sublimehq-pub.gpg
+
+
+- name: Updating packages
+  shell: apt -qqq install apt-transport-https
+
+
+- name: Adding sublime-text to sources list
+  shell: echo "deb https://download.sublimetext.com/ apt/stable/" > /etc/apt/sources.list.d/sublime-text.list
+
+
+- name: Updating packages
+  shell: apt -qqq update
+
+
+- name: Installing sublime-text editor
+  apt:
+    name: 
+      - sublime-text
+    state: latest
+
+
 - name: Cloning Tetanus 
   git:
     repo: 'https://github.com/secgroundzero/tetanus'
