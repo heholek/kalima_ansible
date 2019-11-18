@@ -1,7 +1,7 @@
 - name: Installing Python-Pip
   apt:
     name: 
-      - Python-pip
+      - python-pip
     state: latest
 
 
