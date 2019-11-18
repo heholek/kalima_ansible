@@ -8,6 +8,6 @@
     - bootstrap
     - install_base_tools
     - remove_base_tools
-    - silencer
     - utilities
+    - silencer
 
