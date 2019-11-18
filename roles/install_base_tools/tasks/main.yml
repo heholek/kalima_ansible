@@ -66,10 +66,16 @@
     dest: /opt/windapsearch
 
 
-- name: Installing python-pip
+- name: Installing python-ldap
   apt:
     name: 
       - python-ldap 
+    state: latest
+
+- name: Installing pip3
+  apt:
+    name: 
+      - python3-pip 
     state: latest
 
 
@@ -89,5 +95,56 @@
     dest: /opt/Sharpshooter
 
 
+- name: Cloning PyKerberoast
+  git:
+    repo: 'https://github.com/skelsec/PyKerberoast'
+    dest: /opt/PyKerberoast
 
 
+- name: Cloning hidemyps
+  git:
+    repo: 'https://github.com/cheetz/hidemyps'
+    dest: /opt/hidemyps
+
+
+- name: Cloning bin2c
+  git:
+    repo: 'https://github.com/gwilymk/bin2c'
+    dest: /opt/bin2c
+
+
+- name: Compiling bin2c
+  command: gcc -o /opt/bin2c/bin2c /opt/bin2c/bin2c.c
+
+
+- name: Installing Libre Office
+  apt:
+    name: 
+      - libreoffice 
+    state: latest
+
+
+- name: Installing PowerShell
+  apt:
+    name: 
+      - powershell
+    state: latest
+
+
+- name: Cloning Invoke-Obfuscation
+  git:
+    repo: 'https://github.com/danielbohannon/Invoke-Obfuscation'
+    dest: /opt/Invoke-Obfuscation
+
+
+- name: Cloning SprayingToolkit
+  git:
+    repo: 'https://github.com/byt3bl33d3r/SprayingToolkit'
+    dest: /opt/SprayingToolkit
+
+
+- name: Instaling SprayingToolkit
+  command: sudo -H pip3 install -r /opt/SprayingToolkit/requirements.txt
+
+
+  
