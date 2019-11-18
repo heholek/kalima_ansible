@@ -4,16 +4,21 @@
       - fish
     state: latest
 
-- name: Downloading Oh-My-Fish
-  uri:
-    url: https://get.oh-my.fish
-    follow_redirects: all
-    dest: ~/omf_install
+
+
+- name: Cloning omf 
+  git:
+    repo: 'https://github.com/oh-my-fish/oh-my-fish'
+    dest: /opt/oh-my-fish
+
 
 - name: Installing omf theme
+  shell: /opt/oh-my-fish/bin/install --offline &
+
+
+- name: Configuring default shell
   shell: " {{ item }}"
   with_items: 
-      - fish ~/omf_install --path=~/.local/share/omf --config=~/.config/omf
       - echo /usr/bin/fish | sudo tee -a /etc/shells
       - chsh -s /usr/bin/fish
       - fish -c "omf install mars"
