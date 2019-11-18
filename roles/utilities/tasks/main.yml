@@ -13,10 +13,10 @@
 - name: Installing omf theme
   shell: " {{ item }}"
   with_items: 
-      - fish /root/omf_install --path=~/.local/share/omf --config=~/.config/omf
+      - fish ~/omf_install --path=~/.local/share/omf --config=~/.config/omf
       - echo /usr/bin/fish | sudo tee -a /etc/shells
-      #- chsh -s /usr/bin/fish
-      - omf install mars
+      - chsh -s /usr/bin/fish
+      - fish -c "omf install mars"
 
 
 - name: Configuring Obey2 greeting
