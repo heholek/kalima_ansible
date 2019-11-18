@@ -15,7 +15,7 @@
   with_items: 
       - fish /root/omf_install --path=~/.local/share/omf --config=~/.config/omf
       - echo /usr/bin/fish | sudo tee -a /etc/shells
-      - chsh -s /usr/bin/fish
+      #- chsh -s /usr/bin/fish
       - omf install mars
 
 
