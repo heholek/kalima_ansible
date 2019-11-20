@@ -163,11 +163,20 @@
     state: latest
 
 
+- name: Instaling WitnessMe
+  shell: echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch main" > /etc/apt/sources.list.d/powershell.list
+
+
+- name: Updating sources
+  shell: apt-get update -y
+
+
 - name: Installing PowerShell
   apt:
     name: 
       - powershell
     state: latest
+
 
 
 - name: Cloning Invoke-Obfuscation
