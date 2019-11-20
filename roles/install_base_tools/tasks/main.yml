@@ -4,6 +4,35 @@
       - python-pip 
     state: latest
 
+- name: Setting up dotnet sources
+  shell: " {{ item }}"
+  with_items:
+      - sudo apt-get install -y gpg
+      wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
+      mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
+      wget -q https://packages.microsoft.com/config/ubuntu/18.04/prod.list
+      mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
+      chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
+      chown root:root /etc/apt/sources.list.d/microsoft-prod.list
+
+- name: Installing apt-transport-https
+  apt:
+    name: 
+      - apt-transport-https
+    state: latest
+
+- name: Updating sources
+  shell: apt-get update -y
+
+
+
+- name: Installing dotnet2.2
+  apt:
+    name: 
+      - dotnet-runtime-2.2
+    state: latest
+
+
 
 - name: Downloading Sublime text GPG
   uri:
@@ -107,6 +136,16 @@
     dest: /opt/hidemyps
 
 
+- name: Cloning PowerShell Empire
+  git:
+    repo: 'https://github.com/EmpireProject/Empire'
+    dest: /opt/Empire
+
+- name: Installing Empire
+  command: bash /opt/Empire/setup/install.sh
+
+
+
 - name: Cloning bin2c
   git:
     repo: 'https://github.com/gwilymk/bin2c'
@@ -147,4 +186,96 @@
   command: sudo -H pip3 install -r /opt/SprayingToolkit/requirements.txt
 
 
+- name: Cloning krbrelayx
+  git:
+    repo: 'https://github.com/dirkjanm/krbrelayx'
+    dest: /opt/krbrelayx
+
   
+- name: Cloning WitnessMe
+  git:
+    repo: 'https://github.com/byt3bl33d3r/WitnessMe'
+    dest: /opt/WitnessMe
+
+
+- name: Instaling WitnessMe
+  command: pip3 install -r /opt/WitnessMe/requirements.txt
+
+
+- name: Downloading Java Oracle 8
+  shell: " {{ item }}"
+  with_items: 
+      - wget -q -O ~/Desktop/java.tgz $(curl -s https://www.java.com/en/download/linux_manual.jsp | grep -E ".*x64.*javadl" | grep -v "RPM" | sed "s/.*href=\"//g;s/\".*//g" | head -n 1) 
+      
+- name: Extracting Java to ~/Desktop
+  unarchive:
+    src: ~/Desktop/java.tgz
+    dest: ~/Desktop/
+
+- name: Deleting java archives
+  file:
+    path: ~/Desktop/java.tgz
+    state: absent
+
+- name: Renaming java for ease of transfer
+  shell: mv ~/Desktop/jre* ~/Desktop/java_jre
+
+
+- name: Moving Java to the right location
+  shell: " {{ item }}"
+  with_items:
+      - mkdir /opt/java && mv ~/Desktop/java_jre /opt/java
+      - update-alternatives --install "/usr/bin/java" "java" "/opt/java/java_jre/bin/java" 1
+      - update-alternatives --set java /opt/java/java_jre/bin/java
+
+- name: Cloning SauronEye
+  git:
+    repo: 'https://github.com/vivami/SauronEye'
+    dest: /opt/SauronEye
+
+
+- name: Compiling SauronEye
+  shell: " {{ item }}"
+  with_items: 
+      - xbuild /p:Configuration=Release /opt/SauronEye/src/SauronEye/SauronEye.sln
+      - mv /opt/SauronEye/src/SauronEye/bin/Release/SauronEye.exe /opt/SauronEye/src/SauronEye/
+
+
+- name: Cloning Covenant
+  git:
+    repo: 'git clone --recurse-submodules https://github.com/cobbr/Covenant'
+    recursive: yes 
+    track_submodules: yes
+    dest: /opt/Covenant
+
+
+- name: Compiling Covenant
+  shell: dotnet build /opt/Covenant/Covenant/
+
+
+
+#- name: Compiling Rubeus
+#  shell: " {{ item }}"
+#  with_items: 
+#      - xbuild /p:Configuration=Release /opt/Rubeus/Rubeus.sln
+#      - mv /opt/Rubeus/Rubeus/bin/Release/Rubeus.exe /opt/csharp_tools/
+
+
+#- name: Cloning SeatBelt
+#  git:
+#    repo: 'https://github.com/GhostPack/Seatbelt'
+#    dest: /opt/SeatBelt
+
+#- name: Compiling SeatBelt
+#  shell: " {{ item }}"
+#  with_items: 
+#      - xbuild /p:Configuration=Release /opt/SeatBelt/SeatBelt.sln
+#      - mv /opt/SeatBelt/Rubeus/bin/Release/SauronEye.exe /opt/csharp_tools/
+
+
+
+
+
+
+
+
