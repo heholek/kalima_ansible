@@ -3,11 +3,14 @@
     name: 
       - python-pip 
     state: latest
+    force_apt_get: yes
+
 
 - name: Setting up dotnet sources
   shell: " {{ item }}"
+  warn: no
   with_items:
-      - sudo apt-get install -y gpg
+      - apt-get install -y gpg
       - wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
       - mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
       - wget -q https://packages.microsoft.com/config/ubuntu/18.04/prod.list
@@ -157,20 +160,25 @@
     state: latest
 
 
-- name: Instaling WitnessMe
-  shell: echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch main" > /etc/apt/sources.list.d/powershell.list
+#- name: Instaling PowerShell package list
+#  shell: echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch main" > /etc/apt/sources.list.d/powershell.list
 
 
-- name: Updating sources
-  shell: apt-get update -y
+#- name: Updating sources
+#  shell: apt-get update -y
 
 
-- name: Installing PowerShell
-  apt:
-    name: 
-      - powershell
-    state: latest
+#- name: Installing libssl1 #Necessary for powershell installation
+#  apt:
+#    name: 
+#      - libssl1.0.0
+#    state: latest
 
+#- name: Installing libicu60 #Necessary for powershell installation
+#  apt:
+#    name: 
+#      - libicu60
+#    state: latest
 
 
 - name: Cloning Invoke-Obfuscation
@@ -186,7 +194,7 @@
 
 
 - name: Instaling SprayingToolkit
-  command: sudo -H pip3 install -r /opt/SprayingToolkit/requirements.txt
+  command: pip3 install -r /opt/SprayingToolkit/requirements.txt
 
 
 - name: Cloning krbrelayx
@@ -251,9 +259,118 @@
     track_submodules: yes
     dest: /opt/Covenant
 
-
 - name: Compiling Covenant
   shell: dotnet build /opt/Covenant/Covenant/
+
+
+- name: Creating Cobalt Strike Aggressor scripts directory
+  command: mkdir /opt/cna_scripts
+
+
+- name: Cloning harleyQu1nn CNA Scripts
+  git:
+    repo: 'https://github.com/harleyQu1nn/AggressorScripts'
+    dest: /opt/cna_scripts/harleyQu1nn/AggressorScripts
+
+
+- name: Cloning bluscreenofjeff CNA Scripts
+  git:
+    repo: 'https://github.com/bluscreenofjeff/AggressorScripts'
+    dest: /opt/cna_scripts/bluscreenofjeff/AggressorScripts
+
+
+- name: Cloning vysecurity CNA Scripts
+  git:
+    repo: 'https://github.com/vysecurity/RdpThief'
+    dest: /opt/cna_scripts/vysecurity/RdpThief
+
+
+- name: Cloning PTF
+  git:
+    repo: 'https://github.com/trustedsec/ptf'
+    dest: /opt/ptf
+
+
+- name: Cloning PrivExchange
+  git:
+    repo: 'https://github.com/dirkjanm/PrivExchange'
+    dest: /opt/PrivExchange
+
+
+- name: Cloning PowerLessShell
+  git:
+    repo: 'https://github.com/Mr-Un1k0d3r/PowerLessShell'
+    dest: /opt/PowerLessShell
+
+
+- name: Cloning MailSniper
+  git:
+    repo: 'https://github.com/dafthack/MailSniper'
+    dest: /opt/MailSniper
+
+
+- name: Cloning DomainPasswordSpray
+  git:
+    repo: 'https://github.com/dafthack/DomainPasswordSpray'
+    dest: /opt/DomainPasswordSpray
+
+
+- name: Cloning RDPSpray
+  git:
+    repo: 'https://github.com/dafthack/RDPSpray'
+    dest: /opt/RDPSpray
+
+- name: Cloning PowerMeta
+  git:
+    repo: 'https://github.com/dafthack/PowerMeta'
+    dest: /opt/PowerMeta
+
+
+- name: Cloning HostRecon
+  git:
+    repo: 'https://github.com/dafthack/HostRecon'
+    dest: /opt/HostRecon
+
+
+- name: Cloning SharpAttack
+  git:
+    repo: 'https://github.com/secgroundzero/SharpAttack'
+    dest: /opt/SharpAttack
+
+
+- name: Cloning LinkedInt
+  git:
+    repo: 'https://github.com/vysecurity/LinkedInt'
+    dest: /opt/LinkedInt
+
+
+- name: Cloning ShellcodeConversion
+  git:
+    repo: 'https://github.com/vysecurity/ShellcodeConversion'
+    dest: /opt/ShellcodeConversion
+
+
+- name: Cloning Dumpert
+  git:
+    repo: 'https://github.com/outflanknl/Dumpert'
+    dest: /opt/Dumpert
+
+
+- name: Cloning DomLink
+  git:
+    repo: 'https://github.com/vysecurity/DomLink'
+    dest: /opt/DomLink
+
+
+- name: Cloning RDPassSpray
+  git:
+    repo: 'https://github.com/xFreed0m/RDPassSpray'
+    dest: /opt/RDPassSpray
+
+
+- name: Installing RDPassSpray requirements
+  shell: pip3 install -r /opt/RDPassSpray/requirements.txt
+
 
 
 
