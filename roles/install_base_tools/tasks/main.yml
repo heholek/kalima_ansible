@@ -219,8 +219,8 @@
       
 - name: Extracting Java to /tmp
   unarchive:
-    src: ~/tmp/java.tgz
-    dest: ~/tmp/
+    src: /tmp/java.tgz
+    dest: /tmp/
 
 - name: Deleting java archives
   file:
@@ -228,7 +228,7 @@
     state: absent
 
 - name: Renaming java for ease of transfer
-  shell: mv ~/tmp/jre* ~/tmp/java_jre
+  shell: mv ~tmp/jre* /tmp/java_jre
 
 
 - name: Moving Java to the right location
