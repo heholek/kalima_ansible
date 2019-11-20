@@ -39,25 +39,20 @@
     mode: '0755'
 
 
-- name: Removing useless Kali directories
-  file:
-    path: "{{ item }}"
-    state: absent
-  with_items:
-    - ~/Public
-    - ~/Templates
-    - ~/Music
-    
-- name: Mounting Shared Folders
-  shell: bash /root/Desktop/mount-shared-folders
-
 - name: Setting up wallpaper
   shell: dconf write /org/gnome/desktop/background/picture-uri "'file:///root/Desktop/kalima_ansible/roles/utilities/files/wall.jpg'"
 
 - name: Setting favorite apps
-  shell: dconf write /org/gnome/shell/favorite-apps "['firefox-esr.desktop','gnome-terminal.desktop','org.gnome.Nautilus.desktop','leafpad.desktop', 'sublime_text.desktop']"
+  shell: dconf write /org/gnome/shell/favorite-apps "['firefox-esr.desktop','gnome-terminal.desktop','kali-wireshark.desktop','org.gnome.Nautilus.desktop','kali-msfconsole.desktop','leafpad.desktop', 'sublime_text.desktop']"
 
 #- name: Fixing resolution
 #  shell: bash /root/Desktop/kalima_ansible/roles/utilities/files/fix.sh
 
-  
+- name: Disabling screensaver and beeps
+  shell: " {{ item }}"
+  with_items: 
+      - xset s 0 0
+      - xset s off
+      - echo "xset s off" >> ~/.xinitrc
+      - echo "xset b off" >> ~/.xinitrc
+      - gsettings set org.gnome.desktop.session idle-delay 0
