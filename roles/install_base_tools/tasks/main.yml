@@ -8,7 +8,6 @@
 
 - name: Setting up dotnet sources
   shell: " {{ item }}"
-  warn: no
   with_items:
       - apt-get install -y gpg
       - wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
