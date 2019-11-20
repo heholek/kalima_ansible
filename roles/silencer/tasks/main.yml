@@ -30,7 +30,7 @@
     name: rpcbind
     enabled: no
 
-- name: Stopping network-manager services
+- name: Stopping network-manager services - Going offline
   service:
     name: network-manager.service
     state: stopped

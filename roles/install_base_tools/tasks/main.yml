@@ -25,13 +25,11 @@
   shell: apt-get update -y
 
 
-
 - name: Installing dotnet2.2
   apt:
     name: 
       - dotnet-runtime-2.2
     state: latest
-
 
 
 - name: Downloading Sublime text GPG
@@ -43,10 +41,6 @@
 
 - name: Installing sublime-text GPG
   command: apt-key add ~/sublimehq-pub.gpg
-
-
-- name: Updating packages
-  shell: apt -qqq install apt-transport-https
 
 
 - name: Adding sublime-text to sources list
@@ -214,26 +208,26 @@
 - name: Downloading Java Oracle 8
   shell: " {{ item }}"
   with_items: 
-      - wget -q -O ~/Desktop/java.tgz $(curl -s https://www.java.com/en/download/linux_manual.jsp | grep -E ".*x64.*javadl" | grep -v "RPM" | sed "s/.*href=\"//g;s/\".*//g" | head -n 1) 
+      - wget -q -O /tmp/java.tgz $(curl -s https://www.java.com/en/download/linux_manual.jsp | grep -E ".*x64.*javadl" | grep -v "RPM" | sed "s/.*href=\"//g;s/\".*//g" | head -n 1) 
       
-- name: Extracting Java to ~/Desktop
+- name: Extracting Java to /tmp
   unarchive:
-    src: ~/Desktop/java.tgz
-    dest: ~/Desktop/
+    src: ~/tmp/java.tgz
+    dest: ~/tmp/
 
 - name: Deleting java archives
   file:
-    path: ~/Desktop/java.tgz
+    path: ~/tmp/java.tgz
     state: absent
 
 - name: Renaming java for ease of transfer
-  shell: mv ~/Desktop/jre* ~/Desktop/java_jre
+  shell: mv ~/tmp/jre* ~/tmp/java_jre
 
 
 - name: Moving Java to the right location
   shell: " {{ item }}"
   with_items:
-      - mkdir /opt/java && mv ~/Desktop/java_jre /opt/java
+      - mkdir /opt/java && mv ~/tmp/java_jre /opt/java
       - update-alternatives --install "/usr/bin/java" "java" "/opt/java/java_jre/bin/java" 1
       - update-alternatives --set java /opt/java/java_jre/bin/java
 

@@ -5,3 +5,33 @@
       - apt autoremove -y 
 
 
+
+- name: Removing useless Kali directories
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - ~/Public
+    - ~/Templates
+    - ~/Music
+
+
+- name: Creating Project Directory Skeleton
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - ~/Desktop/Project_1
+    - ~/Desktop/Project_1/0_logs
+    - ~/Desktop/Project_1/1_evidence
+    - ~/Desktop/Project_1/2_scripts
+    - ~/Desktop/Project_1/3_downloads
+    - ~/Desktop/Project_1/4_scans
+    - ~/Desktop/Project_1/5_screenshots
+    - ~/Desktop/Project_1/6_notes
+    - ~/Desktop/Project_1/7_random
+
+- name: Mounting Shared Folders
+  shell: bash /root/Desktop/mount-shared-folders
+
+
