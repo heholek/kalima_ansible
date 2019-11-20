@@ -22,7 +22,6 @@
       - chsh -s /usr/bin/fish
       - fish -c "omf install mars"
 
-cat 
 - name: Configuring Obey2 greeting
   command: cp ~/Desktop/kalima_ansible/roles/utilities/files/obey2 ~/.config/fish/obey2
 
