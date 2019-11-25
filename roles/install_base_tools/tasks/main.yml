@@ -206,7 +206,7 @@
     state: absent
 
 - name: Renaming java for ease of transfer
-  shell: mv ~tmp/jre* /tmp/java_jre
+  shell: mv /tmp/jre* /tmp/java_jre
 
 
 - name: Moving Java to the right location
