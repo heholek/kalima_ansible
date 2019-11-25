@@ -60,6 +60,14 @@
     state: latest
 
 
+- name: Installing sublime-text editor
+  apt:
+    name: 
+      - mono-complete
+    state: latest
+
+
+
 - name: Cloning Tetanus 
   git:
     repo: 'https://github.com/secgroundzero/tetanus'
