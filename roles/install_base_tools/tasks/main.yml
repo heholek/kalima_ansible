@@ -138,7 +138,7 @@
     dest: /opt/Empire
 
 - name: Installing Empire
-  command: bash /opt/Empire/setup/install.sh
+  command: cd /opt/Empire/setup/ && ./install.sh
 
 
 
