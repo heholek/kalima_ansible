@@ -137,10 +137,6 @@
     repo: 'https://github.com/EmpireProject/Empire'
     dest: /opt/Empire
 
-- name: Installing Empire
-  command: cd /opt/Empire/setup/ && ./install.sh
-
-
 
 - name: Cloning bin2c
   git:
