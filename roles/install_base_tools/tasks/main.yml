@@ -158,28 +158,6 @@
       - libreoffice 
     state: latest
 
-
-#- name: Instaling PowerShell package list
-#  shell: echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch main" > /etc/apt/sources.list.d/powershell.list
-
-
-#- name: Updating sources
-#  shell: apt-get update -y
-
-
-#- name: Installing libssl1 #Necessary for powershell installation
-#  apt:
-#    name: 
-#      - libssl1.0.0
-#    state: latest
-
-#- name: Installing libicu60 #Necessary for powershell installation
-#  apt:
-#    name: 
-#      - libicu60
-#    state: latest
-
-
 - name: Cloning Invoke-Obfuscation
   git:
     repo: 'https://github.com/danielbohannon/Invoke-Obfuscation'
@@ -234,7 +212,7 @@
 - name: Moving Java to the right location
   shell: " {{ item }}"
   with_items:
-      - mkdir /opt/java && mv ~/tmp/java_jre /opt/java
+      - mkdir /opt/java && mv /tmp/java_jre /opt/java
       - update-alternatives --install "/usr/bin/java" "java" "/opt/java/java_jre/bin/java" 1
       - update-alternatives --set java /opt/java/java_jre/bin/java
 
@@ -369,32 +347,6 @@
 
 - name: Installing RDPassSpray requirements
   shell: pip3 install -r /opt/RDPassSpray/requirements.txt
-
-
-
-
-#- name: Compiling Rubeus
-#  shell: " {{ item }}"
-#  with_items: 
-#      - xbuild /p:Configuration=Release /opt/Rubeus/Rubeus.sln
-#      - mv /opt/Rubeus/Rubeus/bin/Release/Rubeus.exe /opt/csharp_tools/
-
-
-#- name: Cloning SeatBelt
-#  git:
-#    repo: 'https://github.com/GhostPack/Seatbelt'
-#    dest: /opt/SeatBelt
-
-#- name: Compiling SeatBelt
-#  shell: " {{ item }}"
-#  with_items: 
-#      - xbuild /p:Configuration=Release /opt/SeatBelt/SeatBelt.sln
-#      - mv /opt/SeatBelt/Rubeus/bin/Release/SauronEye.exe /opt/csharp_tools/
-
-
-
-
-
 
 
 
