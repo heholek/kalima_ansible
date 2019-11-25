@@ -137,6 +137,10 @@
     repo: 'https://github.com/EmpireProject/Empire'
     dest: /opt/Empire
 
+- name: Empire installation
+  shell: echo "Empire cloning complete. Run the installation script manually"
+
+
 
 - name: Cloning bin2c
   git:
