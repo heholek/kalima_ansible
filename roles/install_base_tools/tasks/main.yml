@@ -233,7 +233,7 @@
 - name: Compiling SauronEye
   shell: " {{ item }}"
   with_items: 
-      - xbuild /p:Configuration=Release /opt/SauronEye/src/SauronEye/SauronEye.sln
+      - xbuild /p:Configuration=Release /opt/SauronEye/src/SauronEye.sln
       - mv /opt/SauronEye/src/SauronEye/bin/Release/SauronEye.exe /opt/SauronEye/src/SauronEye/
 
 
