@@ -16,6 +16,7 @@
       - mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
       - chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
       - chown root:root /etc/apt/sources.list.d/microsoft-prod.list
+  warn: false
 
 - name: Installing apt-transport-https
   apt:
@@ -43,6 +44,7 @@
 
 - name: Installing sublime-text GPG
   command: apt-key add ~/sublimehq-pub.gpg
+  warn: false
 
 
 - name: Adding sublime-text to sources list
@@ -202,7 +204,8 @@
   shell: " {{ item }}"
   with_items: 
       - wget -q -O /tmp/java.tgz $(curl -s https://www.java.com/en/download/linux_manual.jsp | grep -E ".*x64.*javadl" | grep -v "RPM" | sed "s/.*href=\"//g;s/\".*//g" | head -n 1) 
-      
+  warn: false
+
 - name: Extracting Java to /tmp
   unarchive:
     src: /tmp/java.tgz
@@ -223,6 +226,7 @@
       - mkdir /opt/java && mv /tmp/java_jre /opt/java
       - update-alternatives --install "/usr/bin/java" "java" "/opt/java/java_jre/bin/java" 1
       - update-alternatives --set java /opt/java/java_jre/bin/java
+  warn: false
 
 - name: Cloning SauronEye
   git:
