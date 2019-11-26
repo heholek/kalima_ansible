@@ -239,7 +239,7 @@
 
 - name: Cloning Covenant
   git:
-    repo: 'git clone --recurse-submodules https://github.com/cobbr/Covenant'
+    repo: 'https://github.com/cobbr/Covenant'
     recursive: yes 
     track_submodules: yes
     dest: /opt/Covenant
