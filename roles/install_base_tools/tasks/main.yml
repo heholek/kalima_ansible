@@ -16,7 +16,7 @@
       - mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
       - chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
       - chown root:root /etc/apt/sources.list.d/microsoft-prod.list
-  warn: false
+  
 
 - name: Installing apt-transport-https
   apt:
