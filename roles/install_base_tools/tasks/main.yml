@@ -44,7 +44,7 @@
 
 - name: Installing sublime-text GPG
   command: apt-key add ~/sublimehq-pub.gpg
-  warn: false
+  
 
 
 - name: Adding sublime-text to sources list
