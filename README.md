@@ -4,6 +4,8 @@
 
 **First ever attempt in ansible so the layout might be completely wrong**
 
+***Reboot at the end!***
+
 The playbook consists of 4 roles:
 
 1. Bootstrap
