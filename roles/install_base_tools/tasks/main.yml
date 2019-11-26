@@ -203,6 +203,7 @@
   shell: " {{ item }}"
   with_items: 
       - wget -q -O /tmp/java.tgz $(curl -s https://www.java.com/en/download/linux_manual.jsp | grep -E ".*x64.*javadl" | grep -v "RPM" | sed "s/.*href=\"//g;s/\".*//g" | head -n 1) 
+        warn: no  
   
 
 - name: Extracting Java to /tmp
@@ -225,7 +226,6 @@
       - mkdir /opt/java && mv /tmp/java_jre /opt/java
       - update-alternatives --install "/usr/bin/java" "java" "/opt/java/java_jre/bin/java" 1
       - update-alternatives --set java /opt/java/java_jre/bin/java
-  warn: false
 
 - name: Cloning SauronEye
   git:
