@@ -30,7 +30,7 @@
 - name: Installing dotnet2.2
   apt:
     name: 
-      - dotnet-runtime-2.2
+      - dotnet-sdk-2.2
     state: latest
 
 
@@ -234,7 +234,7 @@
   shell: " {{ item }}"
   with_items: 
       - xbuild /p:Configuration=Release /opt/SauronEye/src/SauronEye.sln
-      - mv /opt/SauronEye/src/SauronEye/bin/Release/SauronEye.exe /opt/SauronEye/src/SauronEye/
+      - mv /opt/SauronEye/src/SauronEye/bin/Release/SauronEye.exe /opt/SauronEye/
 
 
 - name: Cloning Covenant
