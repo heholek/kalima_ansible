@@ -20,7 +20,11 @@
   with_items: 
       - echo /usr/bin/fish | sudo tee -a /etc/shells
       - chsh -s /usr/bin/fish
-      - fish -c "omf install mars"
+
+- name: Installing omf shell
+  shell: fish -c "omf install mars"
+  ignore_errors: true
+
 
 - name: Configuring Obey2 greeting
   command: cp ~/Desktop/kalima_ansible/roles/utilities/files/obey2 ~/.config/fish/obey2
