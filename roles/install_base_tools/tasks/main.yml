@@ -203,8 +203,6 @@
   shell: " {{ item }}"
   with_items: 
       - wget -q -O /tmp/java.tgz $(curl -s https://www.java.com/en/download/linux_manual.jsp | grep -E ".*x64.*javadl" | grep -v "RPM" | sed "s/.*href=\"//g;s/\".*//g" | head -n 1) 
-        warn: no  
-  
 
 - name: Extracting Java to /tmp
   unarchive:
