@@ -201,8 +201,9 @@
 
 
 - name: Downloading Java Oracle 8
-  warn: no
+
   shell: " {{ item }}"
+  warn: no
   with_items: 
       - wget -q -O /tmp/java.tgz $(curl -s https://www.java.com/en/download/linux_manual.jsp | grep -E ".*x64.*javadl" | grep -v "RPM" | sed "s/.*href=\"//g;s/\".*//g" | head -n 1) 
   
